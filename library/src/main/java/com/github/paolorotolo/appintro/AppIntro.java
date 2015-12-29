@@ -321,25 +321,23 @@ public abstract class AppIntro extends AppCompatActivity {
     public void setProgressButtonEnabled(boolean progressButtonEnabled) {
         this.progressButtonEnabled = progressButtonEnabled;
 
-        if (getPosition() == getSlideCount() - 1) {
+        String[] permissions = getPermissionsForPosition(getPosition());
+        if (!hasPermissions(permissions)) {
+            setButtonState(doneButton, false);
+            setButtonState(nextButton, false);
+            setButtonState(grantButton, true);
+        } else if (getPosition() == getSlideCount() - 1) {
             setButtonState(doneButton, true);
             setButtonState(nextButton, false);
             setButtonState(grantButton, false);
+        } else if (progressButtonEnabled) {
+            setButtonState(nextButton, true);
+            setButtonState(doneButton, false);
+            setButtonState(grantButton, false);
         } else {
-            String[] permissions = getPermissionsForPosition(getPosition());
-            if (!hasPermissions(permissions)) {
-                setButtonState(doneButton, false);
-                setButtonState(nextButton, false);
-                setButtonState(grantButton, true);
-            } else if (progressButtonEnabled) {
-                setButtonState(nextButton, true);
-                setButtonState(doneButton, false);
-                setButtonState(grantButton, false);
-            } else {
-                setButtonState(nextButton, false);
-                setButtonState(doneButton, false);
-                setButtonState(grantButton, false);
-            }
+            setButtonState(nextButton, false);
+            setButtonState(doneButton, false);
+            setButtonState(grantButton, false);
         }
     }
 
@@ -642,7 +640,11 @@ public abstract class AppIntro extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == getPosition()) {
-            next();
+            if(getPosition() == getSlideCount() - 1){
+                onDonePressed();
+            } else {
+                next();
+            }
         }
     }
 }
