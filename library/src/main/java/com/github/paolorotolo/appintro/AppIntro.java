@@ -85,7 +85,7 @@ public abstract class AppIntro extends AppCompatActivity {
                 if (isVibrateOn) {
                     mVibrator.vibrate(vibrateIntensity);
                 }
-                onSkipPressed();
+                onSkipPressed(pager.getCurrentItem());
             }
         });
 
@@ -111,11 +111,11 @@ public abstract class AppIntro extends AppCompatActivity {
                         permissionsArray.remove(position);
                     } else {
                         pager.setCurrentItem(pager.getCurrentItem() + 1);
-                        onNextPressed();
+                        onNextPressed(pager.getCurrentItem());
                     }
                 } else {
                     pager.setCurrentItem(pager.getCurrentItem() + 1);
-                    onNextPressed();
+                    onNextPressed(pager.getCurrentItem());
                 }
             }
         });
@@ -126,7 +126,7 @@ public abstract class AppIntro extends AppCompatActivity {
                 if (isVibrateOn) {
                     mVibrator.vibrate(vibrateIntensity);
                 }
-                onDonePressed();
+                onDonePressed(pager.getCurrentItem());
             }
         });
 
@@ -162,7 +162,7 @@ public abstract class AppIntro extends AppCompatActivity {
                     setProgressButtonEnabled(progressButtonEnabled);
                 }
                 setButtonState(skipButton, skipButtonEnabled);
-                onSlideChanged();
+                onSlideChanged(pager.getCurrentItem());
             }
 
             @Override
@@ -263,20 +263,28 @@ public abstract class AppIntro extends AppCompatActivity {
 
     public abstract void init(@Nullable Bundle savedInstanceState);
 
-    public abstract void onSkipPressed();
+    public void onSkipPressed(int position){
 
-    public abstract void onNextPressed();
+    }
 
-    public abstract void onDonePressed();
+    public void onNextPressed(int position){
 
-    public abstract void onSlideChanged();
+    }
+
+    public void onDonePressed(int position){
+
+    }
+
+    public void onSlideChanged(int position){
+
+    }
 
     @Override
     public boolean onKeyDown(int code, KeyEvent kvent) {
         if (code == KeyEvent.KEYCODE_ENTER || code == KeyEvent.KEYCODE_BUTTON_A || code == KeyEvent.KEYCODE_DPAD_CENTER) {
             ViewPager vp = (ViewPager) this.findViewById(R.id.view_pager);
             if (vp.getCurrentItem() == vp.getAdapter().getCount() - 1) {
-                onDonePressed();
+                onDonePressed(pager.getCurrentItem());
             } else {
                 vp.setCurrentItem(vp.getCurrentItem() + 1);
             }
@@ -586,6 +594,7 @@ public abstract class AppIntro extends AppCompatActivity {
         }
     }
 
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
                                            @NonNull int[] grantResults) {
     	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
