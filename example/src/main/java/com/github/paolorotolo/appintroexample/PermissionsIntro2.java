@@ -24,13 +24,13 @@ public class PermissionsIntro2 extends AppIntro2 {
         addSlide(AppIntroFragment.newInstance("All set!", "All done! \n", R.drawable.ic_slide4, Color.parseColor("#2196F3")));
 
         // Ask Camera permission in the second slide
-        askForPermissions(new String[]{Manifest.permission.CAMERA}, 2);
+        askForPermissions(new String[]{Manifest.permission.CAMERA}, 1);
 
         // Ask Storage permission in the third slide
-        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 3);
+        askForPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
 
         // Ask Location permission in the fifth slide
-        askForPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 5);
+        askForPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 4);
     }
 
     private void loadMainActivity() {
@@ -39,17 +39,8 @@ public class PermissionsIntro2 extends AppIntro2 {
     }
 
     @Override
-    public void onNextPressed() {
-    }
-
-    @Override
     public void onDonePressed() {
         loadMainActivity();
-    }
-
-    @Override
-    public void onSlideChanged() {
-
     }
 
     public void getStarted(View v) {

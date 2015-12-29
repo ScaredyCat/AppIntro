@@ -92,11 +92,11 @@ public abstract class AppIntro2 extends AppCompatActivity {
                         permissionsArray.remove(position);
                     } else {
                         pager.setCurrentItem(pager.getCurrentItem() + 1);
-                        onNextPressed(pager.getCurrentItem());
+                        onNextPressed();
                     }
                 } else {
                     pager.setCurrentItem(pager.getCurrentItem() + 1);
-                    onNextPressed(pager.getCurrentItem());
+                    onNextPressed();
                 }
             }
         });
@@ -107,7 +107,7 @@ public abstract class AppIntro2 extends AppCompatActivity {
                 if (isVibrateOn) {
                     mVibrator.vibrate(vibrateIntensity);
                 }
-                onDonePressed(pager.getCurrentItem());
+                onDonePressed();
             }
         });
 
@@ -334,11 +334,11 @@ public abstract class AppIntro2 extends AppCompatActivity {
 
     public abstract void init(@Nullable Bundle savedInstanceState);
 
-    public void onNextPressed(int position){
+    public void onNextPressed(){
 
     }
 
-    public void onDonePressed(int position){
+    public void onDonePressed(){
 
     }
 
@@ -351,7 +351,7 @@ public abstract class AppIntro2 extends AppCompatActivity {
         if (code == KeyEvent.KEYCODE_ENTER || code == KeyEvent.KEYCODE_BUTTON_A || code == KeyEvent.KEYCODE_DPAD_CENTER) {
             ViewPager vp = (ViewPager) this.findViewById(R.id.view_pager);
             if (vp.getCurrentItem() == vp.getAdapter().getCount() - 1) {
-                onDonePressed(pager.getCurrentItem());
+                onDonePressed();
             } else {
                 vp.setCurrentItem(vp.getCurrentItem() + 1);
             }

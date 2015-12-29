@@ -22,10 +22,6 @@ public class DefaultIntro extends AppIntro {
     }
 
     @Override
-    public void onNextPressed() {
-    }
-
-    @Override
     public void onSkipPressed() {
         loadMainActivity();
         Toast.makeText(getApplicationContext(),
@@ -35,10 +31,6 @@ public class DefaultIntro extends AppIntro {
     @Override
     public void onDonePressed() {
         loadMainActivity();
-    }
-
-    @Override
-    public void onSlideChanged() {
     }
 
     public void getStarted(View v){

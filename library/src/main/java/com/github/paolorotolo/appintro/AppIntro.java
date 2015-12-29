@@ -1,5 +1,6 @@
 package com.github.paolorotolo.appintro;
 
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -139,7 +140,7 @@ public abstract class AppIntro extends AppCompatActivity {
                     }
                 }
                 setProgressButtonEnabled(enableProgressButton);
-                if(grantButton.isEnabled()){
+                if (grantButton.isEnabled()) {
                     setNextPageSwipeLock(true);
                 }
 
@@ -261,7 +262,7 @@ public abstract class AppIntro extends AppCompatActivity {
         int position = getPosition();
         String[] permissions = getPermissionsForPosition(position);
         if (permissions != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(permissionsArray.get(position).getPermissions(), position);
+            requestPermissions(permissions, position);
         } else {
             // this should actually never happen
             next();
@@ -324,19 +325,33 @@ public abstract class AppIntro extends AppCompatActivity {
             setButtonState(doneButton, true);
             setButtonState(nextButton, false);
             setButtonState(grantButton, false);
-        } else if (getPermissionsForPosition(getPosition()) != null) {
-            setButtonState(doneButton, false);
-            setButtonState(nextButton, false);
-            setButtonState(grantButton, true);
-        } else if (progressButtonEnabled) {
-            setButtonState(nextButton, true);
-            setButtonState(doneButton, false);
-            setButtonState(grantButton, false);
         } else {
-            setButtonState(nextButton, false);
-            setButtonState(doneButton, false);
-            setButtonState(grantButton, false);
+            String[] permissions = getPermissionsForPosition(getPosition());
+            if (!hasPermissions(permissions)) {
+                setButtonState(doneButton, false);
+                setButtonState(nextButton, false);
+                setButtonState(grantButton, true);
+            } else if (progressButtonEnabled) {
+                setButtonState(nextButton, true);
+                setButtonState(doneButton, false);
+                setButtonState(grantButton, false);
+            } else {
+                setButtonState(nextButton, false);
+                setButtonState(doneButton, false);
+                setButtonState(grantButton, false);
+            }
         }
+    }
+
+    private boolean hasPermissions(@Nullable String[] permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && permissions != null) {
+            for (String permission : permissions) {
+                if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
