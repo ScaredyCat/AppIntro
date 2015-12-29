@@ -2,4 +2,5 @@
 <resources>
     <string name="skip_button">SKIP</string>
     <string name="done_button">DONE</string>
+    <string name="grant_button">GRANT</string>
 </resources>

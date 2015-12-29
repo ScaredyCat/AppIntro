@@ -71,6 +71,20 @@
                 android:text="@string/done_button"
                 android:textColor="#ffffff"
                 android:visibility="gone" />
+
+            <Button
+                android:id="@+id/grant"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:minWidth="100dp"
+                android:paddingRight="16dp"
+                android:text="@string/grant_button"
+                android:textColor="#ffffff"
+                android:visibility="gone" />
         </FrameLayout>
     </LinearLayout>
 </RelativeLayout>

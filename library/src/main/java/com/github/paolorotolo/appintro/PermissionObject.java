@@ -10,7 +10,7 @@ public class PermissionObject {
         this.position = position;
     }
 
-    public String[] getPermission(){
+    public String[] getPermissions(){
         return permission;
     }
 

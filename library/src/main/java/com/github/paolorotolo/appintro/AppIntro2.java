@@ -88,7 +88,7 @@ public abstract class AppIntro2 extends AppCompatActivity {
 
                 if (requestPermission) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        requestPermissions(permissionsArray.get(position).getPermission(), PERMISSIONS_REQUEST_ALL_PERMISSIONS);
+                        requestPermissions(permissionsArray.get(position).getPermissions(), PERMISSIONS_REQUEST_ALL_PERMISSIONS);
                         permissionsArray.remove(position);
                     } else {
                         pager.setCurrentItem(pager.getCurrentItem() + 1);
